@@ -74,15 +74,22 @@ const getUserProfileQuestions = async (cookie = 'csrftoken=ZqcMUH6LsMcclhBH2wIlq
         return submission.runtime !== "N/A" && weekdays.includes(submission.timestamp)
       }).forEach((submission, index, arr) => {
         days[submission.timestamp] ||= []
-        total += 1
-        difficulty[item.difficulty.toLowerCase()]++
         if (index === arr.length - 1) {
           // 首次
           days[submission.timestamp].push(`[${item.frontendId}]`)
+          // 当天的不算复习
+          const deleteIndex = days[submission.timestamp].findIndex((i) => i === `[复习 ${item.frontendId}]`)
+          if (deleteIndex > -1) {
+            days[submission.timestamp].splice(deleteIndex, 1)
+            return
+          }
         } else {
           // 复习
+          if (days[submission.timestamp].includes(`[复习 ${item.frontendId}]`)) return
           days[submission.timestamp].push(`[复习 ${item.frontendId}]`)
         }
+        total += 1
+        difficulty[item.difficulty.toLowerCase()]++
       })
     }
   }
