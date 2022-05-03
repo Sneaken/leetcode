@@ -8,6 +8,7 @@ const nums = [-2, 0, 0, 2, 2]
  * @return {number[][]}
  */
 const threeSum = function (nums) {
+  // 排序 + 双指针
   nums.sort((a, b) => a - b)
   const ans = []
   const n = nums.length
