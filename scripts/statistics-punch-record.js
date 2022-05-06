@@ -1,4 +1,6 @@
 // 打卡统计
+import {LeetcodeCookie} from "./config.js"
+
 const headers = {
   "accept": "*/*",
   "accept-language": "zh-CN",
@@ -18,7 +20,7 @@ const headers = {
   "Referrer-Policy": "strict-origin-when-cross-origin"
 }
 
-const getUserProfileQuestions = async (cookie = 'LEETCODE_SESSION=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuZXh0X2FmdGVyX29hdXRoIjoiL2NpcmNsZS9hcnRpY2xlLzQ4a3E5ZC8iLCJfYXV0aF91c2VyX2lkIjoiMzk1OTgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjMxZThlNmU2YmFkMDU0OWYxZTlmOTRkN2ZmNjczZjQ0ZjEzMzFkYjM5NDI1OWJkNmZmOTBlYWU3M2Y3Y2QzZmMiLCJpZCI6Mzk1OTgsImVtYWlsIjoiOTI0MzkzNTI3QHFxLmNvbSIsInVzZXJuYW1lIjoiU25lYWtlbiIsInVzZXJfc2x1ZyI6InNuZWFrZW4iLCJhdmF0YXIiOiJodHRwczovL2Fzc2V0cy5sZWV0Y29kZS1jbi5jb20vYWxpeXVuLWxjLXVwbG9hZC91c2Vycy9zbmVha2VuL2F2YXRhcl8xNTIzNTk3OTUxLnBuZyIsInBob25lX3ZlcmlmaWVkIjp0cnVlLCJfdGltZXN0YW1wIjoxNjQ5NjcyNTQ4LjI2NTE0NiwiZXhwaXJlZF90aW1lXyI6MTY1MjIwOTIwMCwidmVyc2lvbl9rZXlfIjowLCJsYXRlc3RfdGltZXN0YW1wXyI6MTY1MTQ5NTAxOH0.s1ghpguJZewZcNQ7tnTNR7s6Z5JxdsUE7a4fv3Zz-U4;') => {
+const getUserProfileQuestions = async (cookie) => {
   const {data: {userProfileQuestions: {questions}}} = await fetch("https://leetcode-cn.com/graphql/", {
     "method": "POST",
     "headers": Object.assign(headers, {
@@ -143,6 +145,6 @@ const getWeekDays = () => {
   return weekDays
 }
 
-getUserProfileQuestions().catch()
+getUserProfileQuestions(LeetcodeCookie).catch()
 
 
