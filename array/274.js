@@ -18,7 +18,7 @@
 //   0 <= citations[i] <= 1000
 
 const citations = [1, 1, 3]
-// 前 h 大
+
 /**
  * @param {number[]} citations
  * @return {number}
@@ -29,6 +29,5 @@ var hIndex = function (citations) {
   while (i--) if (citations[i] > h) h++
   return h
 }
-
 
 console.log('hIndex(citations) =>', hIndex(citations))
