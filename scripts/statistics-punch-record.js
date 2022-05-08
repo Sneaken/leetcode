@@ -67,12 +67,12 @@ const getUserProfileQuestions = async (cookie) => {
   const days = {}
   const weekdays = getWeekDays()
   for (let item of questions) {
-    item.lastSubmittedAt = new Date(item.lastSubmittedAt * 1000).toLocaleDateString()
+    item.lastSubmittedAt = dateFormat(new Date(item.lastSubmittedAt * 1000))
     if (weekdays.includes(item.lastSubmittedAt)) {
       difficulty[item.difficulty.toLowerCase()] ||= 0
       const {data: {submissionList: {submissions}}} = await getProgressSubmissions(cookie, item.titleSlug)
       submissions.filter(submission => {
-        submission.timestamp = new Date(submission.timestamp * 1000).toLocaleDateString()
+        submission.timestamp = dateFormat(new Date(submission.timestamp * 1000))
         return submission.runtime !== "N/A" && weekdays.includes(submission.timestamp)
       }).forEach((submission, index, arr) => {
         days[submission.timestamp] ||= []
@@ -134,14 +134,19 @@ const getProgressSubmissions = (cookie, questionSlug) => {
 
 // 获取这周周一开始到今天的所有日期
 const getWeekDays = () => {
-  const date = new Date()
-  const week = date.getDay() - 1
-  const weekDays = []
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(date.getTime() - (week - i) * 24 * 3600 * 1000)
-    weekDays.push(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate())
+  const weekdays = []
+  const today = new Date()
+  let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (today.getDay() || 6))
+  const end = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - (today.getDay() || 6)))
+  while (start <= end) {
+    start.setDate(start.getDate() + 1)
+    weekdays.push(dateFormat(start))
   }
-  return weekDays
+  return weekdays
+}
+
+const dateFormat = (date) => {
+  return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('/')
 }
 
 getUserProfileQuestions(LeetcodeCookie).catch()
