@@ -136,8 +136,8 @@ const getProgressSubmissions = (cookie, questionSlug) => {
 const getWeekDays = () => {
   const weekdays = []
   const today = new Date()
-  let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (today.getDay() || 6))
-  const end = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - (today.getDay() || 6)))
+  let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (today.getDay() || 7))
+  const end = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - (today.getDay() || 7)))
   while (start <= end) {
     start.setDate(start.getDate() + 1)
     weekdays.push(dateFormat(start))
