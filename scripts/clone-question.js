@@ -2,6 +2,11 @@ import fs from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+// https://leetcode.cn/problems/:titleSlug/
+const titleSlug = "";
+// 项目目录下的文件夹路径（把题目放于以下路径中）
+const _dirname = "";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const headers = {
@@ -99,14 +104,11 @@ async function cloneQuestion(titleSlug, dirname) {
   if (isExists) {
     // 原来的文件备份
     const time = new Date();
-    fs.rename(filePath, filePath.replace(".js", `-${time.toLocaleString().replace(/[ /:]/g, "-")}.js`));
+    await fs.rename(filePath, filePath.replace(".js", `-${time.toLocaleString().replace(/[ /:]/g, "-")}.js`));
   }
-  fs.writeFile(filePath, formatter(translatedContent, jsCodeSnippet));
+  await fs.writeFile(filePath, formatter(translatedContent, jsCodeSnippet));
 }
 
-// https://leetcode.cn/problems/:titleSlug/
-const titleSlug = "";
-// 项目目录下的文件夹路径（把题目放于以下路径中）
-const _dirname = "";
-
-cloneQuestion(titleSlug, _dirname);
+cloneQuestion(titleSlug, _dirname).catch((err) => {
+  console.log(err);
+});
