@@ -2,10 +2,12 @@ import fs from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+const url = "https://leetcode.cn/problems/sZ59z6/";
 // https://leetcode.cn/problems/:titleSlug/
-const titleSlug = "";
+const Reg = /^https:\/\/leetcode\.cn\/problems\/(\w+)\/$/;
+const titleSlug = Reg.exec(url)[1];
 // 项目目录下的文件夹路径（把题目放于以下路径中）
-const _dirname = "";
+const _dirname = "tree-node";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -15,7 +17,8 @@ const headers = {
   "cache-control": "no-cache",
   "content-type": "application/json",
   pragma: "no-cache",
-  "sec-ch-ua": '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+  "sec-ch-ua":
+    '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
   "sec-ch-ua-mobile": "?0",
   "sec-ch-ua-platform": '"macOS"',
   "sec-fetch-dest": "empty",
@@ -46,6 +49,8 @@ function formatter(content, codeSnippet) {
       .replace(/\n+/g, "\n// ")
       // 去掉 md 的 引用语法
       .replaceAll("// >", "// ")
+      // 去掉多余的 '// '
+      .replace(/\/\/ $/, "")
       // 去掉 '// ' 行
       .replace(/\/\/\s{1,}\n/g, "")
       // 去掉 md 的 加粗语法
@@ -98,13 +103,26 @@ async function cloneQuestion(titleSlug, dirname) {
 
   const { questionFrontendId, translatedContent, codeSnippets } = question;
 
-  const filePath = join(__dirname, "..", dirname, questionFrontendId.replaceAll(" ", "") + ".js");
+  const filePath = join(
+    __dirname,
+    "..",
+    dirname,
+    questionFrontendId.replaceAll(" ", "") + ".js"
+  );
   const isExists = await isFileExists(filePath);
-  const jsCodeSnippet = codeSnippets.find((codeSnippet) => codeSnippet.lang === "JavaScript").code;
+  const jsCodeSnippet = codeSnippets.find(
+    (codeSnippet) => codeSnippet.lang === "JavaScript"
+  ).code;
   if (isExists) {
     // 原来的文件备份
     const time = new Date();
-    await fs.rename(filePath, filePath.replace(".js", `-${time.toLocaleString().replace(/[ /:]/g, "-")}.js`));
+    await fs.rename(
+      filePath,
+      filePath.replace(
+        ".js",
+        `-${time.toLocaleString().replace(/[ /:]/g, "-")}.js`
+      )
+    );
   }
   await fs.writeFile(filePath, formatter(translatedContent, jsCodeSnippet));
 }
