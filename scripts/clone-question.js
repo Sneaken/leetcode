@@ -45,7 +45,7 @@ function formatter({ titleSlug, translatedContent, codeSnippet }) {
     translatedContent
       // 去除实体字符
       .replace(/\&[^;]+;/g, "")
-      // 去除 html标签
+      // 去除 html 标签
       .replace(/<\/?.+?\/?>/g, "")
       // 去掉换行符后面的空格
       .replace(/\n\s+/g, "\n")
