@@ -14,6 +14,13 @@
 // 1 <= low <= high <= 10^5
 // 所有 Node.val 互不相同
 
+import { changeArrToTreeNode } from './index.js';
+
+const root = [10, 5, 15, 3, 7, 13, 18, 1, null, 6],
+  low = 6,
+  high = 10;
+const rootTree = changeArrToTreeNode(root);
+
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -28,4 +35,19 @@
  * @param {number} high
  * @return {number}
  */
-var rangeSumBST = function (root, low, high) {};
+var rangeSumBST = function (root, low, high) {
+  let sum = 0;
+  const dfs = (node) => {
+    if (!node) return;
+    node.val >= low && dfs(node.left);
+    if (node.val >= low && node.val <= high) {
+      sum += node.val;
+    }
+    node.val <= high && dfs(node.right);
+  };
+
+  dfs(root);
+  return sum;
+};
+
+console.log('rangeSumBST(rootTree) =>', rangeSumBST(rootTree, low, high));
