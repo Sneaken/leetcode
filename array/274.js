@@ -17,17 +17,18 @@
 //   1 <= n <= 5000
 //   0 <= citations[i] <= 1000
 
-const citations = [1, 1, 3]
+const citations = [1, 1, 3];
 
 /**
  * @param {number[]} citations
  * @return {number}
  */
 var hIndex = function (citations) {
-  citations.sort((a, b) => a - b)
-  let h = 0, i = citations.length
-  while (i--) if (citations[i] > h) h++
-  return h
-}
+  citations.sort((a, b) => a - b);
+  let h = 0,
+    i = citations.length;
+  while (i--) if (citations[i] > h) h++;
+  return h;
+};
 
-console.log('hIndex(citations) =>', hIndex(citations))
+console.log('hIndex(citations) =>', hIndex(citations));

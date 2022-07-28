@@ -1,4 +1,4 @@
-import { TreeNode } from "./index.js";
+import { TreeNode } from './index.js';
 
 const nums = [3, 2, 1, 6, 0, 5];
 /**

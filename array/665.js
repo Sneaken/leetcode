@@ -15,27 +15,26 @@
 //   1 <= n <= 104
 //   -10^5 <= nums[i] <= 10^5
 
-const nums = [3, 4, 2, 3]
+const nums = [3, 4, 2, 3];
 /**
  * @param {number[]} nums
  * @return {boolean}
  */
 var checkPossibility = function (nums) {
-  const n = nums.length
-  let count = 0
+  const n = nums.length;
+  let count = 0;
   for (let i = 0; i < n - 1; ++i) {
     if (nums[i] > nums[i + 1]) {
-      count++
+      count++;
       if (count > 1) {
-        return false
+        return false;
       }
       if (i > 0 && nums[i + 1] < nums[i - 1]) {
-        nums[i + 1] = nums[i]
+        nums[i + 1] = nums[i];
       }
     }
   }
-  return true
-}
+  return true;
+};
 
-
-console.log('checkPossibility(nums) =>', checkPossibility(nums))
+console.log('checkPossibility(nums) =>', checkPossibility(nums));

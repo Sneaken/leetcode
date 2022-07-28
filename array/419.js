@@ -13,54 +13,57 @@
 //   1 <= m, n <= 200
 //   board[i][j] 是 '.' 或 'X'
 
-
 // 进阶：你可以实现一次扫描算法，并只使用 O(1) 额外空间，并且不修改 board 的值来解决这个问题吗？
 
-const board = [["X", ".", ".", "X"], [".", ".", ".", "X"], [".", ".", ".", "X"]]
+const board = [
+  ['X', '.', '.', 'X'],
+  ['.', '.', '.', 'X'],
+  ['.', '.', '.', 'X'],
+];
 /**
  * @param {string[][]} board
  * @return {number}
  */
 
 var countBattleships = function (board) {
-  const row = board.length
-  const col = board[0].length
-  let ans = 0
+  const row = board.length;
+  const col = board[0].length;
+  let ans = 0;
   for (let i = 0; i < row; ++i) {
     for (let j = 0; j < col; ++j) {
       if (board[i][j] === 'X') {
-        board[i][j] = '.'
+        board[i][j] = '.';
         for (let k = j + 1; k < col && board[i][k] === 'X'; ++k) {
-          board[i][k] = '.'
+          board[i][k] = '.';
         }
         for (let k = i + 1; k < row && board[k][j] === 'X'; ++k) {
-          board[k][j] = '.'
+          board[k][j] = '.';
         }
-        ans++
+        ans++;
       }
     }
   }
-  return ans
-}
+  return ans;
+};
 
-console.log('countBattleships(board) =>', countBattleships(board))
+console.log('countBattleships(board) =>', countBattleships(board));
 
 var countBattleships = function (board) {
-  const m = board.length
-  const n = board[0].length
-  let ans = 0
+  const m = board.length;
+  const n = board[0].length;
+  let ans = 0;
   for (let i = 0; i < m; ++i) {
     for (let j = 0; j < n; ++j) {
       if (board[i][j] === 'X') {
         if (i >= 1 && board[i - 1][j] === 'X') {
-          continue
+          continue;
         }
         if (j >= 1 && board[i][j - 1] === 'X') {
-          continue
+          continue;
         }
-        ans++
+        ans++;
       }
     }
   }
-  return ans
-}
+  return ans;
+};

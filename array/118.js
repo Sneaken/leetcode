@@ -9,28 +9,28 @@
 //   输出: [[1]]
 // 提示:
 //   1 <= numRows <= 30
-const numRows = 5
+const numRows = 5;
 /**
  * @param {number} numRows
  * @return {number[][]}
  */
 var generate = function (numRows) {
-  const ans = []
+  const ans = [];
   for (let i = 1; i <= numRows; i++) {
-    const level = []
-    level[0] = 1
-    level[i - 1] = 1
-    let left = 1
-    const lastRow = ans[i - 2]
-    const mid = i % 2 === 1 ? (i + 1) / 2 : i / 2
+    const level = [];
+    level[0] = 1;
+    level[i - 1] = 1;
+    let left = 1;
+    const lastRow = ans[i - 2];
+    const mid = i % 2 === 1 ? (i + 1) / 2 : i / 2;
     while (left < mid) {
-      const value = lastRow[left - 1] + lastRow[left]
-      level[left] = level[i - left - 1] = value
-      left++
+      const value = lastRow[left - 1] + lastRow[left];
+      level[left] = level[i - left - 1] = value;
+      left++;
     }
-    ans.push(level)
+    ans.push(level);
   }
-  return ans
-}
+  return ans;
+};
 
-console.log('generate(numRows) =>', generate(numRows))
+console.log('generate(numRows) =>', generate(numRows));

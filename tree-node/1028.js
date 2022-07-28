@@ -1,24 +1,24 @@
-import { TreeNode } from "./index.js";
+import { TreeNode } from './index.js';
 
-const traversal = "1-401--349---90--88";
+const traversal = '1-401--349---90--88';
 function recoverFromPreorder(traversal) {
   const path = [];
   let pos = 0;
   while (pos < traversal.length) {
     let level = 0;
-    while (traversal[pos] === "-") {
+    while (traversal[pos] === '-') {
       level++;
       pos++;
     }
     let val = 0;
-    while (pos < traversal.length && traversal[pos] !== "-") {
+    while (pos < traversal.length && traversal[pos] !== '-') {
       // 不一定是个位数字
       val = val * 10 + Number(traversal[pos]);
       pos++;
     }
 
     const node = new TreeNode(val);
-    console.log("level =>", level);
+    console.log('level =>', level);
     if (level === path.length) {
       if (path.length > 0) {
         path[path.length - 1].left = node;
@@ -39,7 +39,7 @@ const recoverFromPreorder2 = function (s) {
     cur = 0;
 
   function dfs(dep) {
-    while (s[i] === "-") cur++, i++;
+    while (s[i] === '-') cur++, i++;
     if (cur !== dep) return null;
     let val = 0;
     while (s[i] < 10) val = val * 10 + +s[i++];

@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [1, 2, 3, 5, 6];
 
@@ -20,7 +20,7 @@ function binaryTreePaths(root) {
     path.pop();
   };
   dfs(root);
-  return res.map((r) => r.join("->"));
+  return res.map((r) => r.join('->'));
 }
 
 const isLeafNode = (node) => !node.left && !node.right;
@@ -37,12 +37,12 @@ function binaryTreePaths2(root) {
       // 当前节点是叶子节点
       paths.push(path); // 把路径加入到答案中
     } else {
-      path += "->"; // 当前节点不是叶子节点，继续递归遍历
+      path += '->'; // 当前节点不是叶子节点，继续递归遍历
       construct_paths(root.left, path);
       construct_paths(root.right, path);
     }
   };
-  construct_paths(root, "");
+  construct_paths(root, '');
   return paths;
 }
 
@@ -64,12 +64,12 @@ function binaryTreePaths3(root) {
     } else {
       if (node.left !== null) {
         node_queue.push(node.left);
-        path_queue.push(path + "->" + node.left.val.toString());
+        path_queue.push(path + '->' + node.left.val.toString());
       }
 
       if (node.right !== null) {
         node_queue.push(node.right);
-        path_queue.push(path + "->" + node.right.val.toString());
+        path_queue.push(path + '->' + node.right.val.toString());
       }
     }
   }

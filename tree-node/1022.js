@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [1, 0, 1, 0, 1, 0, 1];
 const rootTree = changeArrToTreeNode(root);
@@ -10,7 +10,7 @@ const sumRootToLeaf = function (root) {
     if (!root) return;
     list.push(root.val);
     if (!root.left && !root.right) {
-      ans.push(list.join(""));
+      ans.push(list.join(''));
       list.pop();
       return;
     }

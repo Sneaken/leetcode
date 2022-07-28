@@ -16,7 +16,7 @@ KthLargest.prototype.add = function (val) {
     this.nums.push(val);
   }
   this.nums.sort((a, b) => b - a);
-  console.log("this.nums =>", this.nums);
+  console.log('this.nums =>', this.nums);
   return this.nums[this.k - 1];
 };
 

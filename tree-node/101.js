@@ -11,7 +11,7 @@
 // -100 = Node.val = 100
 // 进阶：你可以运用递归和迭代两种方法解决这个问题吗？
 
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [1, 2, 2, 3, 4, 4, 3];
 const rootTree = changeArrToTreeNode(root);
@@ -55,5 +55,5 @@ var isSymmetric2 = function (root) {
   return check(root, root);
 };
 
-console.log("isSymmetric(rootTree) => ", isSymmetric(rootTree));
-console.log("isSymmetric2(rootTree) => ", isSymmetric2(rootTree));
+console.log('isSymmetric(rootTree) => ', isSymmetric(rootTree));
+console.log('isSymmetric2(rootTree) => ', isSymmetric2(rootTree));

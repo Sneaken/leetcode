@@ -15,38 +15,39 @@
 //
 // 进阶：你能尽量减少完成的操作次数吗？
 
-const nums = [1, 3, 0, 7, 8, 5, 0, 0, 3, 4, 5, 6, 0]
+const nums = [1, 3, 0, 7, 8, 5, 0, 0, 3, 4, 5, 6, 0];
 
 /**
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function (nums) {
-  let n = nums.length
-  let count = 0
+  let n = nums.length;
+  let count = 0;
   while (n--) {
     if (nums[n] === 0) {
-      nums.splice(n, 1)
-      count++
-      n++
+      nums.splice(n, 1);
+      count++;
+      n++;
     }
   }
   while (count--) {
-    nums.push(0)
+    nums.push(0);
   }
-  console.log('nums =>', nums)
-}
+  console.log('nums =>', nums);
+};
 
 var moveZeroes = function (nums) {
-  let n = nums.length
-  let left = 0, right = 0
+  let n = nums.length;
+  let left = 0,
+    right = 0;
   while (right < n) {
     if (nums[right] !== 0) {
-      [nums[left], nums[right]] = [nums[right], nums[left]]
-      left++
+      [nums[left], nums[right]] = [nums[right], nums[left]];
+      left++;
     }
-    right++
+    right++;
   }
-  console.log('nums =>', nums)
-}
-moveZeroes(nums)
+  console.log('nums =>', nums);
+};
+moveZeroes(nums);

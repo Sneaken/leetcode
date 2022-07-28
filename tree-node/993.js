@@ -3,7 +3,7 @@
 // 如果二叉树的两个节点深度相同，但 父节点不同 ，则它们是一对堂兄弟节点。
 // 我们给出了具有唯一值的二叉树的根节点 root ，以及树中两个不同节点的值 x 和 y 。
 // 只有与值 x 和 y 对应的节点是堂兄弟节点时，才返回 true 。否则，返回 false。
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 const root = [1, 2, 3, 4],
   x = 4,
   y = 3;
@@ -52,4 +52,4 @@ const isCousins = function (root, x, y) {
   return x_depth === y_depth && x_parent !== y_parent;
 };
 
-console.log("isCousins(root, x, y) => ", isCousins(rootTree, x, y));
+console.log('isCousins(root, x, y) => ', isCousins(rootTree, x, y));

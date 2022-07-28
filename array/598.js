@@ -17,7 +17,9 @@
 //   1 <= ai <= m
 //   1 <= bi <= n
 
-const m = 39999, n = 39999, ops = [[19999, 19999]]
+const m = 39999,
+  n = 39999,
+  ops = [[19999, 19999]];
 /**
  * @param {number} m
  * @param {number} n
@@ -25,12 +27,13 @@ const m = 39999, n = 39999, ops = [[19999, 19999]]
  * @return {number}
  */
 var maxCount = function (m, n, ops) {
-  let mina = m, minb = n
+  let mina = m,
+    minb = n;
   for (const [ai, bi] of ops) {
-    mina = Math.min(mina, ai)
-    minb = Math.min(minb, bi)
+    mina = Math.min(mina, ai);
+    minb = Math.min(minb, bi);
   }
-  return mina * minb
-}
+  return mina * minb;
+};
 
-console.log('maxCount(m,n,ops) =>', maxCount(m, n, ops))
+console.log('maxCount(m,n,ops) =>', maxCount(m, n, ops));

@@ -5,53 +5,60 @@
 // 输入：matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 // 输出：[1,2,3,6,9,8,7,4,5]
 
-const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
 /**
  * @param {number[][]} matrix
  * @return {number[]}
  */
 var spiralOrder = function (matrix) {
-  let m = matrix.length
-  let n = matrix[0].length
-  const ans = []
-  let x = 0, y = 0
-  let step = m * n
-  let direction = '👉'
-  let endY = n - 1, endX = m - 1, startX = 0, startY = 0
+  let m = matrix.length;
+  let n = matrix[0].length;
+  const ans = [];
+  let x = 0,
+    y = 0;
+  let step = m * n;
+  let direction = '👉';
+  let endY = n - 1,
+    endX = m - 1,
+    startX = 0,
+    startY = 0;
   while (step--) {
-    ans.push(matrix[x][y])
+    ans.push(matrix[x][y]);
     switch (direction) {
       case '👉':
-        y++
+        y++;
         if (y === endY) {
-          direction = '👇'
-          startX++
+          direction = '👇';
+          startX++;
         }
-        break
+        break;
       case '👇':
-        x++
+        x++;
         if (x === endX) {
-          direction = '👈'
-          endY--
+          direction = '👈';
+          endY--;
         }
-        break
+        break;
       case '👈':
-        y--
+        y--;
         if (y === startY) {
-          direction = '👆'
-          endX--
+          direction = '👆';
+          endX--;
         }
-        break
+        break;
       case '👆':
-        x--
+        x--;
         if (x === startX) {
-          direction = '👉'
+          direction = '👉';
         }
-        break
+        break;
     }
-
   }
-  return ans
-}
+  return ans;
+};
 
-console.log('spiralOrder(matrix) =>', spiralOrder(matrix))
+console.log('spiralOrder(matrix) =>', spiralOrder(matrix));

@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root1 = [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4];
 const root1Tree = changeArrToTreeNode(root1);
@@ -16,8 +16,8 @@ function leafSimilar(root1, root2) {
     dfs(root.right, path);
     return path;
   };
-  const r1 = `-${dfs(root1).join("-")}-`;
-  const r2 = `-${dfs(root2).join("-")}-`;
+  const r1 = `-${dfs(root1).join('-')}-`;
+  const r2 = `-${dfs(root2).join('-')}-`;
   return r1 === r2;
 }
 

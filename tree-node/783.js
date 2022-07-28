@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [96, 12, null, null, 13, null, 52, 29];
 
@@ -21,7 +21,7 @@ const minDiffInBST = function (root) {
     dfs(root.right);
   };
   dfs(root);
-  console.log("list =>", list);
+  console.log('list =>', list);
 
   return min;
 };

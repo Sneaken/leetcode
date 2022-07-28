@@ -1,4 +1,4 @@
-import { TreeNode } from "./index.js";
+import { TreeNode } from './index.js';
 
 const inorder = [9, 3, 15, 20, 7],
   postorder = [9, 15, 7, 20, 3];
@@ -24,34 +24,13 @@ const buildTree = function (inorder, postorder) {
     const leftTreeSize = iIndex - iStart;
     // 递归地构造左子树，并连接到根节点
     // 中序遍历中「从 左边界 开始到 根节点定位-1」个元素就对应了后序遍历中「从 左边界 开始的 leftTreeSize」个元素
-    root.left = build(
-      inorder,
-      iStart,
-      iIndex - 1,
-      postorder,
-      pStart,
-      pStart + leftTreeSize - 1
-    );
+    root.left = build(inorder, iStart, iIndex - 1, postorder, pStart, pStart + leftTreeSize - 1);
     // 递归地构造右子树，并连接到根节点
     // 后序遍历中「从 根节点定位+1 到 右边界」的元素就对应了中序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素
-    root.right = build(
-      inorder,
-      iIndex + 1,
-      iEnd,
-      postorder,
-      pStart + leftTreeSize,
-      pEnd - 1
-    );
+    root.right = build(inorder, iIndex + 1, iEnd, postorder, pStart + leftTreeSize, pEnd - 1);
     return root;
   };
-  return build(
-    inorder,
-    0,
-    inorder.length - 1,
-    postorder,
-    0,
-    postorder.length - 1
-  );
+  return build(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
 };
 
 console.log(buildTree(inorder, postorder));

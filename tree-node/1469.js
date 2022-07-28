@@ -3,29 +3,29 @@
 //
 // 给定一棵二叉树的根节点 root ，返回树中 所有的独生节点的值所构成的数组 。数组的顺序 不限 。
 
-import {changeArrToTreeNode} from "./index.js"
+import { changeArrToTreeNode } from './index.js';
 
-const root = [11, 99, 88, 77, null, null, 66, 55, null, null, 44, 33, null, null, 22]
-const rootTree = changeArrToTreeNode(root)
+const root = [11, 99, 88, 77, null, null, 66, 55, null, null, 44, 33, null, null, 22];
+const rootTree = changeArrToTreeNode(root);
 
 const getLonelyNodes = function (root) {
-  const ans = []
+  const ans = [];
 
   const dfs = (root, parent) => {
-    if (!root) return
+    if (!root) return;
     if (parent) {
       if ((parent.left && !parent.right) || (parent.right && !parent.left)) {
-        ans.push(root.val)
+        ans.push(root.val);
       }
     }
 
-    dfs(root.left, root)
-    dfs(root.right, root)
-  }
+    dfs(root.left, root);
+    dfs(root.right, root);
+  };
 
-  dfs(root, null)
+  dfs(root, null);
 
-  return ans
-}
+  return ans;
+};
 
-console.log(getLonelyNodes(rootTree))
+console.log(getLonelyNodes(rootTree));

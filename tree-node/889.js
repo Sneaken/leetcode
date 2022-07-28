@@ -1,4 +1,4 @@
-import { TreeNode } from "./index.js";
+import { TreeNode } from './index.js';
 
 const preorder = [1, 2],
   postorder = [2, 1];
@@ -21,14 +21,7 @@ const constructFromPrePost = function (preorder, postorder) {
     let rootLeftVal = preorder[pStart + 1];
     let rootLeftValIndexOfPostorder = map.get(rootLeftVal);
     const leftTreeSize = rootLeftValIndexOfPostorder - poStart + 1;
-    root.left = build(
-      preorder,
-      pStart + 1,
-      pStart + leftTreeSize,
-      postorder,
-      poStart,
-      rootLeftValIndexOfPostorder
-    );
+    root.left = build(preorder, pStart + 1, pStart + leftTreeSize, postorder, poStart, rootLeftValIndexOfPostorder);
     root.right = build(
       preorder,
       pStart + leftTreeSize + 1,
@@ -40,14 +33,7 @@ const constructFromPrePost = function (preorder, postorder) {
     return root;
   };
 
-  return build(
-    preorder,
-    0,
-    preorder.length - 1,
-    postorder,
-    0,
-    preorder.length - 1
-  );
+  return build(preorder, 0, preorder.length - 1, postorder, 0, preorder.length - 1);
 };
 
 console.log(constructFromPrePost(preorder, postorder));

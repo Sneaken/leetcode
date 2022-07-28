@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 // 230. 二叉搜索树中第K小的元素
 const root = [3, 1, 4, null, 2],

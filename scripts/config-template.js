@@ -1,5 +1,5 @@
 export const yuqueConfig = {
-  token: ''
-}
+  token: '',
+};
 
-export const LeetcodeCookie = ''
+export const LeetcodeCookie = '';

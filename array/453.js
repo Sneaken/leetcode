@@ -15,14 +15,14 @@
 //   -109 <= nums[i] <= 109
 //   答案保证符合 32-bit 整数
 
-const nums = [1, 2, 3]
+const nums = [1, 2, 3];
 /**
  * @param {number[]} nums
  * @return {number}
  */
 var minMoves = function (nums) {
-  const min = Math.min(...nums)
-  return nums.reduce((l, i) => l + i - min, 0)
-}
+  const min = Math.min(...nums);
+  return nums.reduce((l, i) => l + i - min, 0);
+};
 
-console.log('minMoves(nums) =>', minMoves(nums))
+console.log('minMoves(nums) =>', minMoves(nums));

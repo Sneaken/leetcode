@@ -16,21 +16,22 @@
 //   1 <= n <= 105
 //   1 <= nums[i] <= n
 //   nums 中的每个元素出现 一次 或 两次
-const nums = [1, 1, 2]
+const nums = [1, 1, 2];
 /**
  * @param {number[]} nums
  * @return {number[]}
  */
 var findDuplicates = function (nums) {
-  const map = {}, ans = []
-  const n = nums.length
+  const map = {},
+    ans = [];
+  const n = nums.length;
   for (let i = 0; i < n; i++) {
-    map[nums[i]] ||= 0
-    map[nums[i]]++
-    if (map[nums[i]] === 2) ans.push(nums[i])
+    map[nums[i]] ||= 0;
+    map[nums[i]]++;
+    if (map[nums[i]] === 2) ans.push(nums[i]);
   }
 
-  return ans
-}
+  return ans;
+};
 
-console.log('findDuplicates(nums) =>', findDuplicates(nums))
+console.log('findDuplicates(nums) =>', findDuplicates(nums));

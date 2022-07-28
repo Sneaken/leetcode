@@ -1,16 +1,16 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [1, 2, 2, 3, 4, 4, 3, 1];
 const rootTree = changeArrToTreeNode(root);
 
-console.log("rootTree =>", rootTree);
+console.log('rootTree =>', rootTree);
 const test = () => {
   const path = [];
   let maxDepth = 0;
   let depth = 0;
   const dfs = (root) => {
     if (!root) {
-      console.log("depth =>", depth);
+      console.log('depth =>', depth);
       maxDepth = Math.max(maxDepth, depth);
       return;
     }
@@ -20,7 +20,7 @@ const test = () => {
     depth--;
   };
   dfs(rootTree);
-  console.log("path =>", path);
+  console.log('path =>', path);
 };
 
 test();
@@ -38,7 +38,7 @@ const isSymmetric = function (root) {
         queue.push(node.left);
         queue.push(node.right);
       } else {
-        level.push("None");
+        level.push('None');
       }
     }
     if ([...level].reverse().toString() !== level.toString()) return false;

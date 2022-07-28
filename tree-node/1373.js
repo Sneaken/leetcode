@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [1, null, 10, -5, 20];
 const rootTree = changeArrToTreeNode(root);
@@ -48,4 +48,4 @@ const maxSumBST = function (root) {
   return max;
 };
 
-console.log("maxSumBST(rootTree) =>", maxSumBST(rootTree));
+console.log('maxSumBST(rootTree) =>', maxSumBST(rootTree));

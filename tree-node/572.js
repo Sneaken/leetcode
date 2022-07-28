@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [3, 4, 5, 1, 2];
 const rootTree = changeArrToTreeNode(root);
@@ -7,19 +7,19 @@ const subRootTree = changeArrToTreeNode(subRoot);
 
 function isSubtree(root, subRoot) {
   const dfs = (root, path = []) => {
-    if (!root) return path.join("-");
+    if (!root) return path.join('-');
     path.push(root.val);
     if (root.left) {
       dfs(root.left, path);
     } else {
-      path.push("ln");
+      path.push('ln');
     }
     if (root.right) {
       dfs(root.right, path);
     } else {
-      path.push("rn");
+      path.push('rn');
     }
-    return path.join("-");
+    return path.join('-');
   };
 
   const subRootPath = `-${dfs(subRoot)}-`;

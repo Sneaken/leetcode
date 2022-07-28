@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [1, 2, 3, 4, 5, 6];
 
@@ -77,4 +77,4 @@ function sumOfLeftLeaves3(root) {
   return ans;
 }
 
-console.log("sumOfLeftLeaves =>", sumOfLeftLeaves3(rootTree));
+console.log('sumOfLeftLeaves =>', sumOfLeftLeaves3(rootTree));

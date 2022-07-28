@@ -23,58 +23,65 @@
 //   1 <= m, n <= 200
 //   0 <= img[i][j] <= 255
 
-const img = [[2, 3, 4], [5, 6, 7], [8, 9, 10], [11, 12, 13], [14, 15, 16]]
+const img = [
+  [2, 3, 4],
+  [5, 6, 7],
+  [8, 9, 10],
+  [11, 12, 13],
+  [14, 15, 16],
+];
 
 /**
  * @param {number[][]} img
  * @return {number[][]}
  */
 var imageSmoother = function (img) {
-  const m = img.length
-  const n = img[0].length
-  const ans = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  const m = img.length;
+  const n = img[0].length;
+  const ans = new Array(m).fill(0).map((_) => new Array(n).fill(0));
   const getSurroundingNumbers = (x, y) => {
-    const ans = []
-    ans.push(img?.[x - 1]?.[y + 1])
-    ans.push(img?.[x - 1]?.[y])
-    ans.push(img?.[x - 1]?.[y - 1])
-    ans.push(img?.[x]?.[y - 1])
-    ans.push(img?.[x]?.[y])
-    ans.push(img?.[x]?.[y + 1])
-    ans.push(img?.[x + 1]?.[y - 1])
-    ans.push(img?.[x + 1]?.[y])
-    ans.push(img?.[x + 1]?.[y + 1])
-    const near = ans.filter(i => i !== undefined)
-    return (near.reduce((total, current) => total + current, 0) / near.length) | 0
-  }
+    const ans = [];
+    ans.push(img?.[x - 1]?.[y + 1]);
+    ans.push(img?.[x - 1]?.[y]);
+    ans.push(img?.[x - 1]?.[y - 1]);
+    ans.push(img?.[x]?.[y - 1]);
+    ans.push(img?.[x]?.[y]);
+    ans.push(img?.[x]?.[y + 1]);
+    ans.push(img?.[x + 1]?.[y - 1]);
+    ans.push(img?.[x + 1]?.[y]);
+    ans.push(img?.[x + 1]?.[y + 1]);
+    const near = ans.filter((i) => i !== undefined);
+    return (near.reduce((total, current) => total + current, 0) / near.length) | 0;
+  };
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      ans[i][j] = getSurroundingNumbers(i, j)
+      ans[i][j] = getSurroundingNumbers(i, j);
     }
   }
-  return ans
-}
+  return ans;
+};
 
-
-console.log('imageSmoother(img) =>', imageSmoother(img))
+console.log('imageSmoother(img) =>', imageSmoother(img));
 
 var imageSmoother = function (img) {
-  const m = img.length, n = img[0].length
-  const ret = new Array(m).fill(0).map(() => new Array(n).fill(0))
+  const m = img.length,
+    n = img[0].length;
+  const ret = new Array(m).fill(0).map(() => new Array(n).fill(0));
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      let num = 0, sum = 0
+      let num = 0,
+        sum = 0;
       for (let x = i - 1; x <= i + 1; x++) {
         for (let y = j - 1; y <= j + 1; y++) {
           if (x >= 0 && x < m && y >= 0 && y < n) {
-            num++
-            sum += img[x][y]
+            num++;
+            sum += img[x][y];
           }
         }
       }
-      ret[i][j] = Math.floor(sum / num)
+      ret[i][j] = Math.floor(sum / num);
     }
   }
-  return ret
-}
+  return ret;
+};

@@ -13,34 +13,33 @@
 // 提示:
 //   0 <= rowIndex <= 33
 
-const rowIndex = 4
+const rowIndex = 4;
 /**
  * @param {number} rowIndex
  * @return {number[]}
  */
 var getRow = function (rowIndex) {
-  if (rowIndex === 0) return [1]
-  const level = []
-  level[0] = 1
-  level[rowIndex] = 1
-  const lastRow = getRow(rowIndex - 1)
-  let left = 1
-  const mid = rowIndex % 2 === 1 ? (rowIndex - 1) / 2 : rowIndex / 2
+  if (rowIndex === 0) return [1];
+  const level = [];
+  level[0] = 1;
+  level[rowIndex] = 1;
+  const lastRow = getRow(rowIndex - 1);
+  let left = 1;
+  const mid = rowIndex % 2 === 1 ? (rowIndex - 1) / 2 : rowIndex / 2;
   while (left <= mid) {
-    level[left] = level[rowIndex - left] = lastRow[left - 1] + lastRow[left]
-    left++
+    level[left] = level[rowIndex - left] = lastRow[left - 1] + lastRow[left];
+    left++;
   }
-  return level
-}
+  return level;
+};
 
-console.log('getRow =>', getRow(rowIndex))
-
+console.log('getRow =>', getRow(rowIndex));
 
 var getRow = function (rowIndex) {
-  const row = new Array(rowIndex + 1).fill(0)
-  row[0] = 1
+  const row = new Array(rowIndex + 1).fill(0);
+  row[0] = 1;
   for (let i = 1; i <= rowIndex; ++i) {
-    row[i] = row[i - 1] * (rowIndex - i + 1) / i
+    row[i] = (row[i - 1] * (rowIndex - i + 1)) / i;
   }
-  return row
-}
+  return row;
+};

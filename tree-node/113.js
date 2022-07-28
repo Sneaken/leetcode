@@ -3,10 +3,11 @@
 //
 // 叶子节点 是指没有子节点的节点。
 
-import {changeArrToTreeNode} from "./index.js"
+import { changeArrToTreeNode } from './index.js';
 
-const root = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1], targetSum = 22
-const rootTree = changeArrToTreeNode(root)
+const root = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1],
+  targetSum = 22;
+const rootTree = changeArrToTreeNode(root);
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -21,33 +22,32 @@ const rootTree = changeArrToTreeNode(root)
  * @return {number[][]}
  */
 const pathSum = function (root, targetSum) {
-  const res = []
-  if (!root) return res
+  const res = [];
+  if (!root) return res;
 
-  const path = []
-  let sum = 0
+  const path = [];
+  let sum = 0;
 
   const dfs = (node) => {
-    if (!node) return
-    path.push(node.val)
-    sum += node.val
+    if (!node) return;
+    path.push(node.val);
+    sum += node.val;
     if (!node.left && !node.right) {
       if (sum === targetSum) {
-        res.push([...path])
+        res.push([...path]);
       }
     }
 
-    dfs(node.left)
-    dfs(node.right)
+    dfs(node.left);
+    dfs(node.right);
 
     // 左右两边都走完了 才需要 后退
-    path.pop()
-    sum -= node.val
+    path.pop();
+    sum -= node.val;
+  };
 
-  }
+  dfs(root);
+  return res;
+};
 
-  dfs(root)
-  return res
-}
-
-console.log('pathSum(rootTree, targetSum) =>', pathSum(rootTree, targetSum))
+console.log('pathSum(rootTree, targetSum) =>', pathSum(rootTree, targetSum));

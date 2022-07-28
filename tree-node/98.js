@@ -1,9 +1,9 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [0, null, 1];
 const rootTree = changeArrToTreeNode(root);
 
-console.log("rootTree =>", rootTree);
+console.log('rootTree =>', rootTree);
 
 function isValidBST(root) {
   return isValid(root, null, null);

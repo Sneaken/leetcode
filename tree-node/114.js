@@ -6,7 +6,7 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-import { TreeNode } from "./index.js";
+import { TreeNode } from './index.js';
 
 /**
  * @param {TreeNode} root

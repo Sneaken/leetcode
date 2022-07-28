@@ -3,29 +3,29 @@
 // 给定一个数组 nums 代表了集合 S 发生错误后的结果。
 // 请你找出重复出现的整数，再找到丢失的整数，将它们以数组的形式返回。
 
-const nums = [3, 2, 2]
+const nums = [3, 2, 2];
 
 /**
  * @param {number[]} nums
  * @return {number[]}
  */
 var findErrorNums = function (nums) {
-  const ans = []
+  const ans = [];
 
-  const n = nums.length
+  const n = nums.length;
   const map = new Array(n).fill(0).reduce((p, c, idx) => {
-    p[idx + 1] = 0
-    return p
-  }, {})
-  nums.forEach(item => map[item]++)
+    p[idx + 1] = 0;
+    return p;
+  }, {});
+  nums.forEach((item) => map[item]++);
   for (let i = 1; i <= n; i++) {
     if (map[i] === 0) {
-      ans[1] = i
+      ans[1] = i;
     } else if (map[i] === 2) {
-      ans[0] = i
+      ans[0] = i;
     }
   }
-  return ans
-}
+  return ans;
+};
 
-console.log('findErrorNums(nums) =>', findErrorNums(nums))
+console.log('findErrorNums(nums) =>', findErrorNums(nums));

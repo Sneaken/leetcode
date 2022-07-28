@@ -22,9 +22,9 @@
  * @return {TreeNode}
  */
 const lowestCommonAncestor = function (root, p, q) {
-  if (root == null) return null
-  if (p.val > q.val) return lowestCommonAncestor(root, q, p)
-  if (root.val >= p.val && root.val <= q.val) return root
-  if (root.val > q.val) return lowestCommonAncestor(root.left, p, q)
-  return lowestCommonAncestor(root.right, p, q)
-}
+  if (root == null) return null;
+  if (p.val > q.val) return lowestCommonAncestor(root, q, p);
+  if (root.val >= p.val && root.val <= q.val) return root;
+  if (root.val > q.val) return lowestCommonAncestor(root.left, p, q);
+  return lowestCommonAncestor(root.right, p, q);
+};

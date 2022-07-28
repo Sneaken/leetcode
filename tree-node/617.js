@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root1 = [1, 3, 2, 5],
   root2 = [2, 1, 3, null, 4, null, 7];

@@ -4,26 +4,26 @@
 // 你可以假设除了整数 0 之外，这个整数不会以零开头。
 //
 
-const digits = [9]
+const digits = [9];
 /**
  * @param {number[]} digits
  * @return {number[]}
  */
 const plusOne = function (digits) {
-  let lastIdx = digits.length - 1
+  let lastIdx = digits.length - 1;
 
-  digits[lastIdx] += 1
+  digits[lastIdx] += 1;
   while (lastIdx >= 0 && digits[lastIdx] >= 10) {
-    digits[lastIdx] -= 10
-    lastIdx -= 1
+    digits[lastIdx] -= 10;
+    lastIdx -= 1;
     if (lastIdx >= 0) {
-      digits[lastIdx] += 1
+      digits[lastIdx] += 1;
     } else {
-      digits.unshift(1)
+      digits.unshift(1);
     }
   }
 
-  return digits
-}
+  return digits;
+};
 
-console.log('plusOne(digits) =>', plusOne(digits))
+console.log('plusOne(digits) =>', plusOne(digits));

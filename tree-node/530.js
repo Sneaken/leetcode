@@ -1,4 +1,4 @@
-import { changeArrToTreeNode } from "./index.js";
+import { changeArrToTreeNode } from './index.js';
 
 const root = [0, null, 2236, 1277, 2776, 519];
 const rootTree = changeArrToTreeNode(root);
@@ -19,7 +19,4 @@ const getMinimumDifference = function (root) {
   return min;
 };
 
-console.log(
-  "getMinimumDifference(rootTree) =>",
-  getMinimumDifference(rootTree)
-);
+console.log('getMinimumDifference(rootTree) =>', getMinimumDifference(rootTree));

@@ -9,23 +9,24 @@
 //
 // 返回艾希处于中毒状态的 总 秒数。
 
-const timeSeries = [1, 2], duration = 2
+const timeSeries = [1, 2],
+  duration = 2;
 /**
  * @param {number[]} timeSeries
  * @param {number} duration
  * @return {number}
  */
 const findPoisonedDuration = function (timeSeries, duration) {
-  let total = 0
+  let total = 0;
   for (let i = 1; i < timeSeries.length; i++) {
-    const diff = timeSeries[i] - timeSeries[i - 1]
+    const diff = timeSeries[i] - timeSeries[i - 1];
     if (diff >= duration) {
-      total += duration
+      total += duration;
     } else {
-      total += diff
+      total += diff;
     }
   }
-  return total + duration
-}
+  return total + duration;
+};
 
-console.log('findPoisonedDuration(timeSeries, duration) =>', findPoisonedDuration(timeSeries, duration))
+console.log('findPoisonedDuration(timeSeries, duration) =>', findPoisonedDuration(timeSeries, duration));
