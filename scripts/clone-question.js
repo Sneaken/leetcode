@@ -116,7 +116,8 @@ async function cloneQuestion(titleSlug, dirname) {
   if (isExists) {
     // 原来的文件备份
     const time = new Date();
-    await fs.rename(filePath, filePath.replace('.js', `-${time.toLocaleString().replace(/[ /:]/g, '-')}.js`));
+    const timeString = `-${time.getFullYear()}-${time.getMonth()}-${time.getDate()}_${time.getHours()}-${time.getMinutes()}.js`;
+    await fs.rename(filePath, filePath.replace('.js', timeString));
   }
   await fs.writeFile(filePath, formatter({ titleSlug, translatedContent, codeSnippet: jsCodeSnippet }));
 }
