@@ -17,7 +17,7 @@
 // 0 = s.length = 5 * 10^4
 // s由英文字母、数字、符号和空格组成
 
-const s = '1111223';
+const s = 'pwwkew';
 /**
  * 84ms
  * 44.3MB
@@ -81,7 +81,7 @@ console.log('lengthOfLongestSubstring2(s) =>', lengthOfLongestSubstring2(s));
 // 44MB
 function lengthOfLongestSubstring3(s) {
   const map = new Map();
-  let left = 0;
+  let left = -1;
   let res = 0;
   for (let right = 0; right < s.length; right++) {
     const char = s[right];
