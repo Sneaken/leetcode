@@ -38,7 +38,7 @@ const isFileExists = async (path) => {
   }
 };
 
-function formatter({ titleSlug, translatedContent, codeSnippet }) {
+function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testcases }) {
   return (
     `// https://leetcode.cn/problems/${titleSlug}/\n` +
     '// ' +
@@ -62,8 +62,10 @@ function formatter({ titleSlug, translatedContent, codeSnippet }) {
       .replace(/\/\/\s{1,}\n/g, '')
       // 去掉 md 的 加粗语法
       .replace(/\*\*(.*?)\*\*/g, ($0, $1) => $1) +
-    '\n' +
-    codeSnippet
+    `\n// 标签: ${topicTags}` +
+    `\nconst testcases = ${testcases}` +
+    `\n${codeSnippet}` +
+    `\n${Array.isArray(JSON.parse(testcases)) ? `testcases.map(it => {\n\n})` : ''}`
   );
 }
 
@@ -108,7 +110,7 @@ async function cloneQuestion(titleSlug, dirname) {
     }),
   }).then((res) => res.json());
 
-  const { questionFrontendId, translatedContent, codeSnippets } = question;
+  const { questionFrontendId, translatedContent, codeSnippets, topicTags, jsonExampleTestcases } = question;
 
   const filePath = join(__dirname, '..', dirname, questionFrontendId.replaceAll(' ', '') + '.js');
   const isExists = await isFileExists(filePath);
@@ -119,7 +121,16 @@ async function cloneQuestion(titleSlug, dirname) {
     const timeString = `-${time.getFullYear()}-${time.getMonth()}-${time.getDate()}_${time.getHours()}-${time.getMinutes()}.js`;
     await fs.rename(filePath, filePath.replace('.js', timeString));
   }
-  await fs.writeFile(filePath, formatter({ titleSlug, translatedContent, codeSnippet: jsCodeSnippet }));
+  await fs.writeFile(
+    filePath,
+    formatter({
+      titleSlug,
+      translatedContent,
+      codeSnippet: jsCodeSnippet,
+      topicTags: topicTags.map((tag) => tag.translatedName),
+      testcases: jsonExampleTestcases,
+    })
+  );
 }
 
 cloneQuestion(titleSlug, _dirname).catch((err) => {
