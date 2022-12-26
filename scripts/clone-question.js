@@ -38,7 +38,9 @@ const isFileExists = async (path) => {
   }
 };
 
-function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testcases }) {
+function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testcases, metaData }) {
+  const params = metaData.params.map((it) => it.name);
+  const isManyTestcases = Array.isArray(JSON.parse(testcases));
   return (
     `// https://leetcode.cn/problems/${titleSlug}/\n` +
     '// ' +
@@ -63,9 +65,27 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
       // 去掉 md 的 加粗语法
       .replace(/\*\*(.*?)\*\*/g, ($0, $1) => $1) +
     `\n// 标签: ${topicTags}` +
-    `\nconst testcases = ${testcases}` +
+    `\nconst testcases = ${
+      isManyTestcases
+        ? JSON.stringify(
+            JSON.parse(testcases).map((it) => {
+              if (params.length > 1) {
+                const ans = it.split('\n');
+                return params.reduce((p, prop, index) => {
+                  p[prop] = JSON.parse(ans[index]);
+                  return p;
+                }, {});
+              }
+              return {
+                [params[0]]: it,
+              };
+            })
+          )
+        : JSON.stringify([JSON.parse(testcases)])
+    }` +
     `\n${codeSnippet}` +
-    `\n${Array.isArray(JSON.parse(testcases)) ? `testcases.map(it => {\n\n})` : ''}`
+    `\ntestcases.map(({ ${params.join(', ')} }) => {\n` +
+    `  console.log('${metaData.name}(${params}) =>', ${metaData.name}(${params.join(', ')}))\n})`
   );
 }
 
@@ -129,6 +149,7 @@ async function cloneQuestion(titleSlug, dirname) {
       codeSnippet: jsCodeSnippet,
       topicTags: topicTags.map((tag) => tag.translatedName),
       testcases: jsonExampleTestcases,
+      metaData: JSON.parse(question.metaData),
     })
   );
 }
