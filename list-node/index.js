@@ -6,6 +6,11 @@ export class ListNode {
   }
 }
 
+/**
+ *
+ * @param {any} arr
+ * @return {ListNode}
+ */
 export function changeArrToListNode(arr) {
   if (arr.length === 0) return null;
   let cur = new ListNode(arr[0]);
