@@ -76,7 +76,7 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
       // 去掉 md 的 加粗语法
       .replace(/\*\*(.*?)\*\*/g, ($0, $1) => $1)
       // 输入输出增加缩进
-      .replace(/输[入出]/g, ($0) => `  ${$0}`)
+      .replace(/输[入出]|解释/g, ($0) => `  ${$0}`)
       // 提示内容增加缩进
       .replace(/\/\/ 提示.*\n(\/\/.*\n)+/, ($0) => {
         return $0.replaceAll('//', '//  ').replace('//   提示', '// 提示');
