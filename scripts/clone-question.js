@@ -84,7 +84,7 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
         : JSON.stringify([JSON.parse(testcases)])
     }` +
     `\n${codeSnippet}` +
-    `\ntestcases.map(({ ${params.join(', ')} }) => {\n` +
+    `\ntestcases.forEach(({ ${params.join(', ')} }) => {\n` +
     `  console.log('${metaData.name}(${params}) =>', ${metaData.name}(${params.join(', ')}))\n})`
   );
 }
