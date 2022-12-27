@@ -45,7 +45,8 @@ var maxProfit = function (prices) {
     dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
   }
   // 5. 打印 dp
-  return Math.max(...dp.map(([_, val]) => val));
+  // 一定是最后一天非持有的现金多
+  return dp[prices.length - 1][1];
 };
 testcases.forEach(({ prices }) => {
   console.log('maxProfit(prices) =>', maxProfit(prices));
