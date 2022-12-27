@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const url = '' || process.argv[2];
 // https://leetcode.cn/problems/:titleSlug/
+if (!url) process.exit();
 const Reg = /^https:\/\/leetcode\.cn\/problems\/(.*?)\/$/;
 const titleSlug = Reg.exec(url)[1];
 // 项目目录下的文件夹路径（把题目放于以下路径中）
@@ -45,8 +46,17 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
     `// https://leetcode.cn/problems/${titleSlug}/\n` +
     '// ' +
     translatedContent
-      // 去除实体字符
-      .replace(/&[^;]+;/g, '')
+      // 转换实体字符
+      .replace(/&[^;]+;/g, ($0) => {
+        switch ($0) {
+          case '&lt;':
+            return '<';
+          case '&gt;':
+            return '>';
+          default:
+            return '';
+        }
+      })
       // 转义 ^ 符号
       .replace(/<sup>(.*?)<\/sup>/gi, ($0, $1) => `^${$1}`)
       // 去除 html 标签
@@ -63,8 +73,14 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
       // 去掉 '// ' 行
       .replace(/\/\/\s{1,}\n/g, '')
       // 去掉 md 的 加粗语法
-      .replace(/\*\*(.*?)\*\*/g, ($0, $1) => $1) +
-    `\n// 标签: ${topicTags}` +
+      .replace(/\*\*(.*?)\*\*/g, ($0, $1) => $1)
+      // 输入输出增加缩进
+      .replace(/输[入出]/g, ($0) => `  ${$0}`)
+      // 提示内容增加缩进
+      .replace(/\/\/ 提示:\n(\/\/.*\n)+/, ($0) => {
+        return $0.replaceAll('//', '//  ').replace('//   提示:', '// 提示:');
+      }) +
+    `// 标签: \n//   ${topicTags.join(', ')}\n` +
     `\nconst testcases = ${
       isManyTestcases
         ? JSON.stringify(
