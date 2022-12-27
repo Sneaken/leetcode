@@ -39,11 +39,12 @@ const isFileExists = async (path) => {
   }
 };
 
-function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testcases, metaData }) {
+function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testcases, metaData, difficulty = '' }) {
   const params = metaData.params.map((it) => it.name);
   const isManyTestcases = Array.isArray(JSON.parse(testcases));
   return (
     `// https://leetcode.cn/problems/${titleSlug}/\n` +
+    `// 难度: ${difficulty}\n//\n` +
     '// ' +
     translatedContent
       // 转换实体字符
@@ -77,8 +78,8 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
       // 输入输出增加缩进
       .replace(/输[入出]/g, ($0) => `  ${$0}`)
       // 提示内容增加缩进
-      .replace(/\/\/ 提示:\n(\/\/.*\n)+/, ($0) => {
-        return $0.replaceAll('//', '//  ').replace('//   提示:', '// 提示:');
+      .replace(/\/\/ 提示.*\n(\/\/.*\n)+/, ($0) => {
+        return $0.replaceAll('//', '//  ').replace('//   提示', '// 提示');
       }) +
     `// 标签: \n//   ${topicTags.join(', ')}\n` +
     `\nconst testcases = ${
@@ -93,7 +94,7 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
                 }, {});
               }
               return {
-                [params[0]]: it,
+                [params[0]]: JSON.parse(it),
               };
             })
           )
@@ -146,7 +147,12 @@ async function cloneQuestion(titleSlug, dirname) {
     }),
   }).then((res) => res.json());
 
-  const { questionFrontendId, translatedContent, codeSnippets, topicTags, jsonExampleTestcases } = question;
+  const { questionFrontendId, translatedContent, codeSnippets, topicTags, jsonExampleTestcases, difficulty } = question;
+  const difficultyMap = {
+    Medium: '中等',
+    Easy: '简单',
+    Hard: '困难',
+  };
 
   const filePath = join(__dirname, '..', dirname, questionFrontendId.replaceAll(' ', '') + '.js');
   const isExists = await isFileExists(filePath);
@@ -166,6 +172,7 @@ async function cloneQuestion(titleSlug, dirname) {
       topicTags: topicTags.map((tag) => tag.translatedName),
       testcases: jsonExampleTestcases,
       metaData: JSON.parse(question.metaData),
+      difficulty: difficultyMap[difficulty],
     })
   );
 }
