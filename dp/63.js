@@ -54,13 +54,14 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
   // dp[0][y] 能走之前都是1 否则为0
   const m = obstacleGrid.length,
     n = obstacleGrid[0].length;
-  const dp = Array.from({ length: m }).map(() => [...Array.from({ length: n })]);
-  dp[0][0] = !obstacleGrid[0][0] ? 1 : 0;
-  for (let x = 1; x < m; x++) {
-    dp[x][0] = dp[x - 1][0] && (!obstacleGrid[x][0] ? 1 : 0);
+  // 可以全设置成0
+  const dp = Array.from({ length: m }).map(() => [...Array.from({ length: n }).fill(0)]);
+  // 符合条件再设置成1
+  for (let x = 1; x < m && !obstacleGrid[x][0]; x++) {
+    dp[x][0] = 1;
   }
-  for (let y = 1; y < n; y++) {
-    dp[0][y] = dp[0][y - 1] && (!obstacleGrid[0][y] ? 1 : 0);
+  for (let y = 1; y < n && !obstacleGrid[0][y]; y++) {
+    dp[0][y] = 1;
   }
   // 4. 遍历顺序
   for (let x = 1; x < m; x++) {
