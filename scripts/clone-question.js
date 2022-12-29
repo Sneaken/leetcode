@@ -159,7 +159,11 @@ async function cloneQuestion(titleSlug, dirname) {
   const jsCodeSnippet = codeSnippets.find((codeSnippet) => codeSnippet.lang === 'JavaScript').code;
   if (isExists) {
     const time = new Date();
-    const timeString = `-${time.getFullYear()}-${time.getMonth()}-${time.getDate()}_${time.getHours()}-${time.getMinutes()}.js`;
+    const month = time.getMonth().toString().padStart(2, '0');
+    const date = time.getDate().toString().padStart(2, '0');
+    const hours = time.getHours().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    const timeString = `-${time.getFullYear()}-${month}-${date}_${hours}-${minutes}.js`;
     filePath = filePath.replace('.js', timeString);
   }
   await fs.writeFile(
