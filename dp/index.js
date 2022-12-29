@@ -31,3 +31,41 @@
 // 三、对各阶段确定状态变量
 // 四、根据状态变量确定费用函数和目标函数
 // 五、建立各阶段的状态变量的转移方程，写出状态转移方程
+
+// 01 背包
+// 有 N 件物品和一个最多能被重量为 W 的背包。第 i 件物品的重量是weight[i]，得到的价值是 value[i] 。
+// 每件物品只能用 **一次** ，求解将哪些物品装入背包里物品价值总和最大。
+// 1. 装满背包(容量为j)的最大价值
+// 递推公式: dp[j] = max(dp[j], dp[j - weight[i]] + value[i])
+// 遍历顺序固定
+// for(let i = 0; i < weight.length; i++) {
+//   for(let j = 预期的背包大小; j >= weight[i]; j--) {
+//     dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+//   }
+// }
+// 2. 装满背包(容量为j)有几种方法
+// 递推公式: dp[j] += dp[j - weight[i]]
+// 遍历顺序固定
+// for(let i = 0; i < weight.length; i++) {
+//   for(let j = 预期的背包大小; j >= weight[i]; j--) {
+//     dp[j] += dp[j - weight[i]]
+//   }
+// }
+
+// 完全背包
+// 有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是 value[i] 。
+// 每件物品都有**无限个(也就是可以放入背包多次)**，求解将哪些物品装入背包里物品价值总和最大。
+// 遍历顺序: 先遍历物品，再遍历背包
+// for(let i = 0; i < weight.length; i++) { // 遍历物品
+//   for(let j = weight[i]; j < bagWeight; j++) { // 遍历背包容量
+//     dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+//   }
+// }
+// 遍历顺序: 先遍历背包，再遍历物品
+// for(let j = 0; j <= bagWeight; j++) { // 遍历背包容量
+//   for(let i = 0; i < weight.length; i++) { // 遍历物品
+//     if (j - weight[i] >= 0) {
+//       dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+//     }
+//   }
+// }
