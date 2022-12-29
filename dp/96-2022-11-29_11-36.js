@@ -20,21 +20,19 @@ const testcases = [{ n: 3 }, { n: 1 }];
  * @return {number}
  */
 var numTrees = function (n) {
-  // 1. 明确 dp 数组以及下标的含义
-  // dp[i] 由 i 个节点组成且节点值从 1 到 i 互不相同的 二叉搜索树 的种类数
-  // 2. 递推公式
-  // dp[i] += dp[j-1] * dp[i-j]
-  // 3. dp数组如何初始化
-  // dp[0] = 0 ❌ 1
+  // dp[i] 以 1-n 为节点的 二叉搜索树的种类数
   const dp = Array.from({ length: n + 1 }).fill(0);
   dp[0] = 1;
-  // 4. 遍历顺序
+  // 以 1 ~ i 为头节点的二叉搜索树的种类数之和
+  // 以 j 为 头节点的二叉搜索树的种类数：dp[j - 1] * dp[i - j]
+  // dp[j-1] 左侧节点的种类数
+  // dp[i-j] 右侧节点的种类数
+  // dp[i] += dp[j - 1] * dp[i-j]
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= i; j++) {
       dp[i] += dp[j - 1] * dp[i - j];
     }
   }
-  // 5. 出现问题 打印 dp 数组
   return dp[n];
 };
 testcases.forEach(({ n }) => {
