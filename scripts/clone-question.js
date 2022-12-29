@@ -154,14 +154,13 @@ async function cloneQuestion(titleSlug, dirname) {
     Hard: '困难',
   };
 
-  const filePath = join(__dirname, '..', dirname, questionFrontendId.replaceAll(' ', '') + '.js');
+  let filePath = join(__dirname, '..', dirname, questionFrontendId.replaceAll(' ', '') + '.js');
   const isExists = await isFileExists(filePath);
   const jsCodeSnippet = codeSnippets.find((codeSnippet) => codeSnippet.lang === 'JavaScript').code;
   if (isExists) {
-    // 原来的文件备份
     const time = new Date();
     const timeString = `-${time.getFullYear()}-${time.getMonth()}-${time.getDate()}_${time.getHours()}-${time.getMinutes()}.js`;
-    await fs.rename(filePath, filePath.replace('.js', timeString));
+    filePath = filePath.replace('.js', timeString);
   }
   await fs.writeFile(
     filePath,
