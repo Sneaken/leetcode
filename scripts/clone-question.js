@@ -40,8 +40,8 @@ const isFileExists = async (path) => {
 };
 
 function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testcases, metaData, difficulty = '' }) {
-  const params = metaData.params.map((it) => it.name);
-  const isManyTestcases = Array.isArray(JSON.parse(testcases));
+  const params = metaData.params?.map((it) => it.name) ?? [];
+  const isManyTestcases = Array.isArray(JSON.parse(testcases)) && JSON.parse(testcases).length > 1;
   return (
     `// https://leetcode.cn/problems/${titleSlug}/\n` +
     `// 难度: ${difficulty}\n//\n` +
@@ -85,24 +85,29 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
     `\nconst testcases = ${
       isManyTestcases
         ? JSON.stringify(
-            JSON.parse(testcases).map((it) => {
-              if (params.length > 1) {
-                const ans = it.split('\n');
-                return params.reduce((p, prop, index) => {
-                  p[prop] = JSON.parse(ans[index]);
-                  return p;
-                }, {});
-              }
-              return {
-                [params[0]]: JSON.parse(it),
-              };
-            })
+            JSON.parse(testcases)
+              .map((it) => {
+                if (!params.length) return null;
+                if (params.length > 1) {
+                  const ans = it.split('\n');
+                  return params.reduce((p, prop, index) => {
+                    p[prop] = JSON.parse(ans[index]);
+                    return p;
+                  }, {});
+                }
+                return {
+                  [params[0]]: JSON.parse(it),
+                };
+              })
+              .filter(Boolean)
           )
         : JSON.stringify([JSON.parse(testcases)])
     }` +
     `\n${codeSnippet}` +
-    `\ntestcases.forEach(({ ${params.join(', ')} }) => {\n` +
-    `  console.log('${metaData.name}(${params}) =>', ${metaData.name}(${params.join(', ')}))\n})`
+    (params.length
+      ? `\ntestcases.forEach(({ ${params.join(', ')} }) => {\n` +
+        `  console.log('${metaData.name}(${params}) =>', ${metaData.name}(${params.join(', ')}))\n})`
+      : '')
   );
 }
 
