@@ -164,7 +164,7 @@ async function cloneQuestion(titleSlug, dirname) {
   const jsCodeSnippet = codeSnippets.find((codeSnippet) => codeSnippet.lang === 'JavaScript').code;
   if (isExists) {
     const time = new Date();
-    const month = time.getMonth().toString().padStart(2, '0');
+    const month = (time.getMonth() + 1).toString().padStart(2, '0');
     const date = time.getDate().toString().padStart(2, '0');
     const hours = time.getHours().toString().padStart(2, '0');
     const minutes = time.getMinutes().toString().padStart(2, '0');
