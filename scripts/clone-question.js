@@ -47,6 +47,7 @@ function formatter({ titleSlug, translatedContent, codeSnippet, topicTags, testc
     `// 难度: ${difficulty}\n//\n` +
     '// ' +
     translatedContent
+      .replaceAll(' ', '')
       // 转换实体字符
       .replace(/&[^;]+;/g, ($0) => {
         switch ($0) {
