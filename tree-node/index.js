@@ -150,5 +150,3 @@ export function changeArrToTreeNode(arr) {
 }
 
 export const isLeafNode = (node) => node && !node.left && !node.right;
-
-[].unshift();
