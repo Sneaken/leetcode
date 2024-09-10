@@ -16,6 +16,8 @@
 //   数组
 
 const testcases = [{ nums: [1, 1, 0, 1, 1, 1] }, { nums: [1, 0, 1, 1, 0, 1] }];
+
+// 双指针的话写法应该是滑动窗口
 /**
  * @param {number[]} nums
  * @return {number}
